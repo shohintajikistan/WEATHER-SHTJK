@@ -7,11 +7,11 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'com.shohin.weather"
+        applicationId 'com.shohin.weather'
         minSdk 23
         targetSdk 35
         versionCode 1
-        versionName "7.0"
+        versionName '7.0'
     }
 }
 
