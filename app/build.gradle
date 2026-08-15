@@ -1,0 +1,19 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.shohin.weather'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.shohin.weather"
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName "7.0"
+    }
+}
+
+dependencies {
+}
