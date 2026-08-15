@@ -1,0 +1,2906 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#07111f"
+>
+
+<title>SHOHIN WEATHER V7.0</title>
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    min-height:100%;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            160deg,
+            #07111f,
+            #0b2940 50%,
+            #07111f
+        );
+
+}
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+
+/* =====================================================
+ APP
+===================================================== */
+
+#app{
+
+    width:100%;
+    min-height:100vh;
+
+    padding-bottom:30px;
+
+}
+
+
+/* =====================================================
+ HEADER
+===================================================== */
+
+.header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    padding:
+        14px
+        15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:
+        rgba(5,15,28,.88);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+
+}
+
+.logo{
+
+    font-size:19px;
+
+    font-weight:900;
+
+    letter-spacing:.5px;
+
+}
+
+.logo span{
+
+    color:#38bdf8;
+
+}
+
+.status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    color:#8fa8bd;
+
+    font-size:10px;
+
+}
+
+.status-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#4ade80;
+
+    box-shadow:
+        0 0 10px
+        #4ade80;
+
+}
+
+
+/* =====================================================
+ MAIN
+===================================================== */
+
+.container{
+
+    width:min(
+        900px,
+        calc(100% - 20px)
+    );
+
+    margin:
+        12px
+        auto;
+
+}
+
+
+/* =====================================================
+ SEARCH
+===================================================== */
+
+.searchBox{
+
+    display:flex;
+
+    gap:7px;
+
+}
+
+#search{
+
+    flex:1;
+
+    width:100%;
+
+    padding:
+        13px
+        14px;
+
+    border:1px solid
+        rgba(255,255,255,.10);
+
+    outline:none;
+
+    border-radius:14px;
+
+    color:white;
+
+    background:
+        rgba(255,255,255,.07);
+
+    font-size:13px;
+
+}
+
+#search::placeholder{
+
+    color:#8298aa;
+
+}
+
+#searchBtn{
+
+    width:48px;
+
+    border:0;
+
+    border-radius:14px;
+
+    color:white;
+
+    background:#0284c7;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+#gpsBtn{
+
+    width:48px;
+
+    border:0;
+
+    border-radius:14px;
+
+    color:white;
+
+    background:#0f766e;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+ SEARCH RESULTS
+===================================================== */
+
+#searchResults{
+
+    display:none;
+
+    margin-top:6px;
+
+    overflow:hidden;
+
+    border-radius:14px;
+
+    background:
+        rgba(5,15,28,.96);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+}
+
+.searchItem{
+
+    padding:
+        12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    cursor:pointer;
+
+}
+
+.searchItem:last-child{
+
+    border-bottom:0;
+
+}
+
+.searchItem:hover{
+
+    background:
+        rgba(56,189,248,.10);
+
+}
+
+.searchName{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+.searchCountry{
+
+    margin-top:3px;
+
+    color:#8fa8bd;
+
+    font-size:10px;
+
+}
+
+
+/* =====================================================
+ HERO
+===================================================== */
+
+.hero{
+
+    position:relative;
+
+    margin-top:12px;
+
+    padding:22px;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,165,233,.25),
+            rgba(15,23,42,.82)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.22);
+
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    right:-70px;
+    top:-70px;
+
+    border-radius:50%;
+
+    background:
+        rgba(56,189,248,.14);
+
+    filter:
+        blur(10px);
+
+}
+
+.location{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:21px;
+
+    font-weight:800;
+
+}
+
+.coordinates{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:4px;
+
+    color:#91a9bb;
+
+    font-size:10px;
+
+}
+
+.currentRow{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+.temperature{
+
+    font-size:68px;
+
+    line-height:1;
+
+    font-weight:200;
+
+}
+
+.weatherIcon{
+
+    font-size:62px;
+
+}
+
+.condition{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:8px;
+
+    color:#c8d7e2;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+ METRICS
+===================================================== */
+
+.metrics{
+
+    margin-top:12px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            1fr
+        );
+
+    gap:7px;
+
+}
+
+.metric{
+
+    padding:12px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+}
+
+.metricIcon{
+
+    font-size:18px;
+
+}
+
+.metricName{
+
+    margin-top:7px;
+
+    color:#8299aa;
+
+    font-size:9px;
+
+}
+
+.metricValue{
+
+    margin-top:4px;
+
+    font-size:13px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+ SECTION
+===================================================== */
+
+.section{
+
+    margin-top:14px;
+
+    padding:15px;
+
+    border-radius:20px;
+
+    background:
+        rgba(5,15,28,.72);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+}
+
+.sectionTitle{
+
+    margin-bottom:11px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+ HOURLY
+===================================================== */
+
+.hourly{
+
+    display:flex;
+
+    gap:7px;
+
+    overflow-x:auto;
+
+    padding-bottom:3px;
+
+}
+
+.hourly::-webkit-scrollbar{
+
+    height:3px;
+
+}
+
+.hour{
+
+    min-width:70px;
+
+    padding:10px 7px;
+
+    text-align:center;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.055);
+
+}
+
+.hour.active{
+
+    background:
+        rgba(14,165,233,.24);
+
+    border:
+        1px solid
+        rgba(56,189,248,.25);
+
+}
+
+.hourTime{
+
+    color:#91a9bb;
+
+    font-size:9px;
+
+}
+
+.hourIcon{
+
+    margin:7px 0;
+
+    font-size:20px;
+
+}
+
+.hourTemp{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+.hourRain{
+
+    margin-top:5px;
+
+    color:#67e8f9;
+
+    font-size:8px;
+
+}
+
+
+/* =====================================================
+ DAILY
+===================================================== */
+
+.daily{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.day{
+
+    display:grid;
+
+    grid-template-columns:
+        75px
+        45px
+        1fr
+        80px;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:11px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.045);
+
+}
+
+.dayName{
+
+    font-size:11px;
+
+    font-weight:bold;
+
+}
+
+.dayIcon{
+
+    font-size:21px;
+
+}
+
+.dayCondition{
+
+    color:#91a9bb;
+
+    font-size:9px;
+
+}
+
+.dayTemp{
+
+    text-align:right;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+ SUN
+===================================================== */
+
+.sunGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+
+}
+
+.sunCard{
+
+    padding:13px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.05);
+
+}
+
+.sunTitle{
+
+    color:#91a9bb;
+
+    font-size:9px;
+
+}
+
+.sunValue{
+
+    margin-top:5px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+ AQI
+===================================================== */
+
+.aqi{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.05);
+
+}
+
+.aqiNumber{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.aqiLabel{
+
+    color:#8fa8bd;
+
+    font-size:10px;
+
+}
+
+
+/* =====================================================
+ LOADING
+===================================================== */
+
+#loading{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        #07111f;
+
+}
+
+#loading.hidden{
+
+    display:none;
+
+}
+
+.loader{
+
+    width:46px;
+    height:46px;
+
+    border-radius:50%;
+
+    border:
+        4px solid
+        rgba(255,255,255,.10);
+
+    border-top-color:
+        #38bdf8;
+
+    animation:
+        spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.loadingText{
+
+    margin-top:14px;
+
+    color:#91a9bb;
+
+    font-size:11px;
+
+}
+
+
+/* =====================================================
+ ERROR
+===================================================== */
+
+#error{
+
+    display:none;
+
+    margin-top:12px;
+
+    padding:13px;
+
+    white-space:pre-wrap;
+
+    color:#fecaca;
+
+    border-radius:13px;
+
+    background:
+        rgba(127,29,29,.55);
+
+    font-size:10px;
+
+}
+
+#error.show{
+
+    display:block;
+
+}
+
+
+/* =====================================================
+ FOOTER
+===================================================== */
+
+.footer{
+
+    padding:20px;
+
+    color:#60788b;
+
+    text-align:center;
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+ MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .container{
+
+        width:
+            calc(100% - 12px);
+
+        margin:
+            7px auto;
+
+    }
+
+    .metrics{
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+    .temperature{
+
+        font-size:56px;
+
+    }
+
+    .weatherIcon{
+
+        font-size:52px;
+
+    }
+
+    .hero{
+
+        padding:18px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="loading">
+
+<div class="loader"></div>
+
+<div class="loadingText">
+
+SHOHIN WEATHER
+
+</div>
+
+<div
+id="loadingStatus"
+class="loadingText"
+>
+
+Загрузка реальной погоды...
+
+</div>
+
+</div>
+
+
+<div id="app">
+
+
+<header class="header">
+
+<div class="logo">
+
+🌤 SHOHIN
+<span>WEATHER</span>
+
+</div>
+
+<div class="status">
+
+<div class="status-dot"></div>
+
+ONLINE
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- SEARCH -->
+
+<div class="searchBox">
+
+<input
+id="search"
+type="search"
+placeholder="🔎 Найти город или район..."
+autocomplete="off"
+/>
+
+<button id="searchBtn">
+
+🔎
+
+</button>
+
+<button id="gpsBtn">
+
+📍
+
+</button>
+
+</div>
+
+
+<div id="searchResults"></div>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+
+<div
+id="location"
+class="location"
+>
+
+Dushanbe
+
+</div>
+
+
+<div
+id="coordinates"
+class="coordinates"
+>
+
+38.5598° N, 68.7870° E
+
+</div>
+
+
+<div class="currentRow">
+
+<div
+id="temperature"
+class="temperature"
+>
+
+--°
+
+</div>
+
+
+<div
+id="weatherIcon"
+class="weatherIcon"
+>
+
+🌤️
+
+</div>
+
+</div>
+
+
+<div
+id="condition"
+class="condition"
+>
+
+Загрузка...
+
+</div>
+
+
+</section>
+
+
+<!-- METRICS -->
+
+<div class="metrics">
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+💧
+
+</div>
+
+<div class="metricName">
+
+Влажность
+
+</div>
+
+<div
+id="humidity"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+🌧️
+
+</div>
+
+<div class="metricName">
+
+Осадки
+
+</div>
+
+<div
+id="rain"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+💨
+
+</div>
+
+<div class="metricName">
+
+Ветер
+
+</div>
+
+<div
+id="wind"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+☁️
+
+</div>
+
+<div class="metricName">
+
+Облачность
+
+</div>
+
+<div
+id="clouds"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+🌀
+
+</div>
+
+<div class="metricName">
+
+Давление
+
+</div>
+
+<div
+id="pressure"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+☀️
+
+</div>
+
+<div class="metricName">
+
+UV Index
+
+</div>
+
+<div
+id="uv"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+🌡️
+
+</div>
+
+<div class="metricName">
+
+Ощущается
+
+</div>
+
+<div
+id="feels"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="metric">
+
+<div class="metricIcon">
+
+⚡
+
+</div>
+
+<div class="metricName">
+
+CAPE
+
+</div>
+
+<div
+id="cape"
+class="metricValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- HOURLY -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+🕐 Почасовой прогноз
+
+</div>
+
+
+<div
+id="hourly"
+class="hourly"
+>
+
+</div>
+
+</section>
+
+
+<!-- DAILY -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+📅 Прогноз на 7 дней
+
+</div>
+
+
+<div
+id="daily"
+class="daily"
+>
+
+</div>
+
+</section>
+
+
+<!-- SUN -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+🌅 Солнце
+
+</div>
+
+
+<div class="sunGrid">
+
+
+<div class="sunCard">
+
+<div class="sunTitle">
+
+🌅 Восход
+
+</div>
+
+<div
+id="sunrise"
+class="sunValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+<div class="sunCard">
+
+<div class="sunTitle">
+
+🌇 Закат
+
+</div>
+
+<div
+id="sunset"
+class="sunValue"
+>
+
+--
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- AQI -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+🌫️ Качество воздуха
+
+</div>
+
+
+<div class="aqi">
+
+<div>
+
+<div
+id="aqiNumber"
+class="aqiNumber"
+>
+
+--
+
+</div>
+
+<div
+id="aqiLabel"
+class="aqiLabel"
+>
+
+Загрузка AQI...
+
+</div>
+
+</div>
+
+
+<div>
+
+🌿
+
+</div>
+
+</div>
+
+</section>
+
+
+<div
+id="error"
+>
+</div>
+
+
+<div class="footer">
+
+SHOHIN WEATHER V7.0
+
+<br>
+
+Real Weather Data • Open-Meteo
+
+</div>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+ SHOHIN WEATHER V7.0
+ CLEAN WEATHER ENGINE
+ NO LAYERS
+ NO RADAR
+ NO GLOBAL LAYER
+===================================================== */
+
+
+/* =====================================================
+ STATE
+===================================================== */
+
+const state = {
+
+    latitude:
+        38.5598,
+
+    longitude:
+        68.7870,
+
+    city:
+        "Dushanbe",
+
+    country:
+        "Tajikistan",
+
+    weather:
+        null,
+
+    air:
+        null
+
+};
+
+
+/* =====================================================
+ HELPERS
+===================================================== */
+
+const $ =
+id =>
+document.getElementById(id);
+
+
+function showError(error){
+
+    console.error(error);
+
+    const box =
+        $("error");
+
+    box.textContent =
+        "❌ Ошибка\n\n" +
+        (
+            error?.message ||
+            String(error)
+        );
+
+    box.classList.add(
+        "show"
+    );
+
+}
+
+
+function hideLoading(){
+
+    $("loading")
+        .classList
+        .add(
+            "hidden"
+        );
+
+}
+
+
+function setLoading(text){
+
+    $("loadingStatus")
+        .textContent =
+        text;
+
+}
+
+
+/* =====================================================
+ WEATHER CODE
+===================================================== */
+
+function weatherInfo(code){
+
+    const data = {
+
+        0:
+        ["☀️","Ясно"],
+
+        1:
+        ["🌤️","Преимущественно ясно"],
+
+        2:
+        ["⛅","Переменная облачность"],
+
+        3:
+        ["☁️","Пасмурно"],
+
+        45:
+        ["🌫️","Туман"],
+
+        48:
+        ["🌫️","Изморозь"],
+
+        51:
+        ["🌦️","Лёгкая морось"],
+
+        53:
+        ["🌦️","Морось"],
+
+        55:
+        ["🌧️","Сильная морось"],
+
+        61:
+        ["🌧️","Небольшой дождь"],
+
+        63:
+        ["🌧️","Дождь"],
+
+        65:
+        ["🌧️","Сильный дождь"],
+
+        71:
+        ["🌨️","Небольшой снег"],
+
+        73:
+        ["❄️","Снег"],
+
+        75:
+        ["❄️","Сильный снег"],
+
+        77:
+        ["🌨️","Снежные зёрна"],
+
+        80:
+        ["🌦️","Ливень"],
+
+        81:
+        ["🌦️","Сильный ливень"],
+
+        82:
+        ["⛈️","Очень сильный ливень"],
+
+        85:
+        ["🌨️","Снегопад"],
+
+        86:
+        ["❄️","Сильный снегопад"],
+
+        95:
+        ["⛈️","Гроза"],
+
+        96:
+        ["⛈️","Гроза с градом"],
+
+        99:
+        ["⛈️","Сильная гроза"]
+
+    };
+
+    return (
+        data[code] ||
+        ["🌤️","Неизвестно"]
+    );
+
+}
+
+
+/* =====================================================
+ OPEN-METEO WEATHER
+===================================================== */
+
+async function loadWeather(){
+
+    setLoading(
+        "Получаем реальную погоду..."
+    );
+
+
+    const url =
+
+        "https://api.open-meteo.com/v1/forecast" +
+
+        "?latitude=" +
+        encodeURIComponent(
+            state.latitude
+        ) +
+
+        "&longitude=" +
+        encodeURIComponent(
+            state.longitude
+        ) +
+
+        "&current=" +
+
+        [
+            "temperature_2m",
+            "relative_humidity_2m",
+            "apparent_temperature",
+            "precipitation",
+            "rain",
+            "weather_code",
+            "cloud_cover",
+            "pressure_msl",
+            "wind_speed_10m",
+            "wind_direction_10m",
+            "uv_index",
+            "cape"
+        ].join(",") +
+
+        "&hourly=" +
+
+        [
+            "temperature_2m",
+            "apparent_temperature",
+            "precipitation_probability",
+            "precipitation",
+            "weather_code",
+            "wind_speed_10m",
+            "cloud_cover",
+            "relative_humidity_2m",
+            "uv_index"
+        ].join(",") +
+
+        "&daily=" +
+
+        [
+            "weather_code",
+            "temperature_2m_max",
+            "temperature_2m_min",
+            "sunrise",
+            "sunset",
+            "precipitation_sum",
+            "precipitation_probability_max",
+            "wind_speed_10m_max",
+            "uv_index_max"
+        ].join(",") +
+
+        "&timezone=auto" +
+
+        "&forecast_days=7";
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                cache:
+                    "no-store"
+            }
+        );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Weather API HTTP " +
+            response.status
+        );
+
+    }
+
+
+    state.weather =
+        await response.json();
+
+
+    return state.weather;
+
+}
+
+
+/* =====================================================
+ AIR QUALITY
+===================================================== */
+
+async function loadAirQuality(){
+
+    setLoading(
+        "Получаем качество воздуха..."
+    );
+
+
+    const url =
+
+        "https://air-quality-api.open-meteo.com/v1/air-quality" +
+
+        "?latitude=" +
+        encodeURIComponent(
+            state.latitude
+        ) +
+
+        "&longitude=" +
+        encodeURIComponent(
+            state.longitude
+        ) +
+
+        "&current=" +
+
+        [
+            "pm10",
+            "pm2_5",
+            "carbon_monoxide",
+            "nitrogen_dioxide",
+            "ozone",
+            "us_aqi"
+        ].join(",") +
+
+        "&timezone=auto";
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                cache:
+                    "no-store"
+            }
+        );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Air Quality API HTTP " +
+            response.status
+        );
+
+    }
+
+
+    state.air =
+        await response.json();
+
+
+    return state.air;
+
+}
+
+
+/* =====================================================
+ CURRENT
+===================================================== */
+
+function renderCurrent(){
+
+    const current =
+        state.weather.current;
+
+
+    const info =
+        weatherInfo(
+            current.weather_code
+        );
+
+
+    $("location")
+        .textContent =
+        state.city;
+
+
+    $("coordinates")
+        .textContent =
+
+        state.latitude.toFixed(4) +
+        "° N, " +
+
+        state.longitude.toFixed(4) +
+        "° E";
+
+
+    $("temperature")
+        .textContent =
+
+        Math.round(
+            current.temperature_2m
+        ) +
+        "°";
+
+
+    $("weatherIcon")
+        .textContent =
+        info[0];
+
+
+    $("condition")
+        .textContent =
+        info[1];
+
+
+    $("humidity")
+        .textContent =
+
+        Math.round(
+            current.relative_humidity_2m
+        ) +
+        "%";
+
+
+    $("rain")
+        .textContent =
+
+        Number(
+            current.precipitation
+        ).toFixed(1) +
+        " mm";
+
+
+    $("wind")
+        .textContent =
+
+        Number(
+            current.wind_speed_10m
+        ).toFixed(1) +
+        " km/h";
+
+
+    $("clouds")
+        .textContent =
+
+        Math.round(
+            current.cloud_cover
+        ) +
+        "%";
+
+
+    $("pressure")
+        .textContent =
+
+        Math.round(
+            current.pressure_msl
+        ) +
+        " hPa";
+
+
+    $("uv")
+        .textContent =
+
+        Number(
+            current.uv_index
+        ).toFixed(1);
+
+
+    $("feels")
+        .textContent =
+
+        Math.round(
+            current.apparent_temperature
+        ) +
+        "°";
+
+
+    $("cape")
+        .textContent =
+
+        Math.round(
+            current.cape || 0
+        ) +
+        " J/kg";
+
+
+    const daily =
+        state.weather.daily;
+
+
+    $("sunrise")
+        .textContent =
+        formatTime(
+            daily.sunrise[0]
+        );
+
+
+    $("sunset")
+        .textContent =
+        formatTime(
+            daily.sunset[0]
+        );
+
+}
+
+
+/* =====================================================
+ HOURLY
+===================================================== */
+
+function renderHourly(){
+
+    const h =
+        state.weather.hourly;
+
+
+    const currentTime =
+        state.weather.current.time;
+
+
+    let start =
+        h.time.indexOf(
+            currentTime
+        );
+
+
+    if(start < 0)
+        start = 0;
+
+
+    const container =
+        $("hourly");
+
+
+    container.innerHTML =
+        "";
+
+
+    for(
+        let i = start;
+        i <
+            Math.min(
+                start + 24,
+                h.time.length
+            );
+        i++
+    ){
+
+        const info =
+            weatherInfo(
+                h.weather_code[i]
+            );
+
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "hour" +
+            (
+                i === start
+                ?
+                " active"
+                :
+                ""
+            );
+
+
+        card.innerHTML = `
+
+            <div class="hourTime">
+                ${formatHour(h.time[i])}
+            </div>
+
+            <div class="hourIcon">
+                ${info[0]}
+            </div>
+
+            <div class="hourTemp">
+                ${Math.round(
+                    h.temperature_2m[i]
+                )}°
+            </div>
+
+            <div class="hourRain">
+                💧 ${
+                    Math.round(
+                        h.precipitation_probability[i] || 0
+                    )
+                }%
+            </div>
+
+        `;
+
+
+        container.appendChild(
+            card
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+ DAILY
+===================================================== */
+
+function renderDaily(){
+
+    const d =
+        state.weather.daily;
+
+
+    const container =
+        $("daily");
+
+
+    container.innerHTML =
+        "";
+
+
+    for(
+        let i = 0;
+        i < 7;
+        i++
+    ){
+
+        const info =
+            weatherInfo(
+                d.weather_code[i]
+            );
+
+
+        const date =
+            new Date(
+                d.time[i]
+            );
+
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "day";
+
+
+        card.innerHTML = `
+
+            <div class="dayName">
+
+                ${
+                    i === 0
+                    ?
+                    "Сегодня"
+                    :
+                    date.toLocaleDateString(
+                        "ru-RU",
+                        {
+                            weekday:"short"
+                        }
+                    )
+                }
+
+            </div>
+
+            <div class="dayIcon">
+
+                ${info[0]}
+
+            </div>
+
+            <div class="dayCondition">
+
+                ${info[1]}
+
+            </div>
+
+            <div class="dayTemp">
+
+                ${Math.round(
+                    d.temperature_2m_min[i]
+                )}°
+                /
+                ${Math.round(
+                    d.temperature_2m_max[i]
+                )}°
+
+            </div>
+
+        `;
+
+
+        container.appendChild(
+            card
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+ AQI
+===================================================== */
+
+function renderAQI(){
+
+    const current =
+        state.air?.current;
+
+
+    if(!current){
+
+        $("aqiNumber")
+            .textContent =
+            "--";
+
+        $("aqiLabel")
+            .textContent =
+            "Нет данных";
+
+        return;
+
+    }
+
+
+    const aqi =
+        Number(
+            current.us_aqi
+        );
+
+
+    if(!Number.isFinite(aqi)){
+
+        $("aqiNumber")
+            .textContent =
+            "--";
+
+        $("aqiLabel")
+            .textContent =
+            "Нет данных";
+
+        return;
+
+    }
+
+
+    $("aqiNumber")
+        .textContent =
+        Math.round(aqi);
+
+
+    $("aqiLabel")
+        .textContent =
+        getAQILabel(
+            aqi
+        );
+
+}
+
+
+/* =====================================================
+ AQI LABEL
+===================================================== */
+
+function getAQILabel(aqi){
+
+    if(aqi <= 50)
+        return "Хорошее качество воздуха";
+
+    if(aqi <= 100)
+        return "Умеренное качество воздуха";
+
+    if(aqi <= 150)
+        return "Нездорово для чувствительных";
+
+    if(aqi <= 200)
+        return "Нездоровое";
+
+    if(aqi <= 300)
+        return "Очень нездоровое";
+
+    return "Опасное";
+
+}
+
+
+/* =====================================================
+ TIME
+===================================================== */
+
+function formatTime(
+    value
+){
+
+    if(!value)
+        return "--";
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    return date.toLocaleTimeString(
+        "ru-RU",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+function formatHour(
+    value
+){
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    return date.toLocaleTimeString(
+        "ru-RU",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =====================================================
+ SEARCH
+===================================================== */
+
+let searchTimer =
+null;
+
+
+$("search")
+.addEventListener(
+    "input",
+    ()=>{
+
+        clearTimeout(
+            searchTimer
+        );
+
+
+        const query =
+            $("search")
+            .value
+            .trim();
+
+
+        if(query.length < 2){
+
+            $("searchResults")
+                .style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        searchTimer =
+            setTimeout(
+                ()=>searchPlaces(
+                    query
+                ),
+                450
+            );
+
+    }
+);
+
+
+/* =====================================================
+ GEOCODING
+===================================================== */
+
+async function searchPlaces(
+    query
+){
+
+    try{
+
+        const url =
+
+            "https://geocoding-api.open-meteo.com/v1/search" +
+
+            "?name=" +
+            encodeURIComponent(
+                query
+            ) +
+
+            "&count=8" +
+
+            "&language=ru" +
+
+            "&format=json";
+
+
+        const response =
+            await fetch(
+                url
+            );
+
+
+        if(!response.ok)
+            return;
+
+
+        const data =
+            await response.json();
+
+
+        const results =
+            data.results || [];
+
+
+        const container =
+            $("searchResults");
+
+
+        container.innerHTML =
+            "";
+
+
+        if(!results.length){
+
+            container.innerHTML = `
+
+                <div class="searchItem">
+
+                    Ничего не найдено
+
+                </div>
+
+            `;
+
+            container.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        results.forEach(
+            place => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "searchItem";
+
+
+                item.innerHTML = `
+
+                    <div class="searchName">
+
+                        ${escapeHTML(
+                            place.name
+                        )}
+
+                    </div>
+
+                    <div class="searchCountry">
+
+                        ${escapeHTML(
+                            place.admin1 || ""
+                        )}
+                        ${
+                            place.country
+                            ?
+                            ", " +
+                            escapeHTML(
+                                place.country
+                            )
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                `;
+
+
+                item.onclick =
+                    ()=>selectPlace(
+                        place
+                    );
+
+
+                container.appendChild(
+                    item
+                );
+
+            }
+        );
+
+
+        container.style.display =
+            "block";
+
+    }
+    catch(error){
+
+        console.error(
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+ SELECT PLACE
+===================================================== */
+
+async function selectPlace(
+    place
+){
+
+    state.latitude =
+        Number(
+            place.latitude
+        );
+
+
+    state.longitude =
+        Number(
+            place.longitude
+        );
+
+
+    state.city =
+        place.name ||
+        "Unknown";
+
+
+    state.country =
+        place.country ||
+        "";
+
+
+    $("search")
+        .value =
+        "";
+
+
+    $("searchResults")
+        .style.display =
+        "none";
+
+
+    $("error")
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    await refreshWeather();
+
+}
+
+
+/* =====================================================
+ GPS
+===================================================== */
+
+$("gpsBtn")
+.onclick =
+()=>{
+
+    if(!navigator.geolocation){
+
+        showError(
+            new Error(
+                "GPS не поддерживается браузером"
+            )
+        );
+
+        return;
+
+    }
+
+
+    setLoading(
+        "Определяем ваше местоположение..."
+    );
+
+
+    $("loading")
+        .classList
+        .remove(
+            "hidden"
+        );
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        async position => {
+
+            try{
+
+                state.latitude =
+                    position.coords.latitude;
+
+                state.longitude =
+                    position.coords.longitude;
+
+
+                await reverseGeocode();
+
+                await refreshWeather();
+
+            }
+            catch(error){
+
+                showError(
+                    error
+                );
+
+                hideLoading();
+
+            }
+
+        },
+
+        error => {
+
+            showError(
+                new Error(
+                    "Не удалось получить GPS: " +
+                    error.message
+                )
+            );
+
+            hideLoading();
+
+        },
+
+        {
+
+            enableHighAccuracy:
+                true,
+
+            timeout:
+                15000,
+
+            maximumAge:
+                300000
+
+        }
+
+    );
+
+};
+
+
+/* =====================================================
+ REVERSE GEOCODING
+===================================================== */
+
+async function reverseGeocode(){
+
+    try{
+
+        const url =
+
+            "https://geocoding-api.open-meteo.com/v1/reverse" +
+
+            "?latitude=" +
+            encodeURIComponent(
+                state.latitude
+            ) +
+
+            "&longitude=" +
+            encodeURIComponent(
+                state.longitude
+            ) +
+
+            "&count=1" +
+
+            "&language=ru" +
+
+            "&format=json";
+
+
+        const response =
+            await fetch(
+                url
+            );
+
+
+        if(!response.ok)
+            return;
+
+
+        const data =
+            await response.json();
+
+
+        const place =
+            data.results?.[0];
+
+
+        if(place){
+
+            state.city =
+                place.name ||
+                "Ваше местоположение";
+
+            state.country =
+                place.country ||
+                "";
+
+        }
+
+    }
+    catch(error){
+
+        console.warn(
+            "Reverse geocoding:",
+            error
+        );
+
+        state.city =
+            "Ваше местоположение";
+
+    }
+
+}
+
+
+/* =====================================================
+ REFRESH
+===================================================== */
+
+async function refreshWeather(){
+
+    try{
+
+        $("loading")
+            .classList
+            .remove(
+                "hidden"
+            );
+
+
+        setLoading(
+            "Получаем реальную погоду..."
+        );
+
+
+        await loadWeather();
+
+
+        renderCurrent();
+
+        renderHourly();
+
+        renderDaily();
+
+
+        try{
+
+            await loadAirQuality();
+
+            renderAQI();
+
+        }
+        catch(aqiError){
+
+            console.warn(
+                "AQI unavailable:",
+                aqiError
+            );
+
+            renderAQI();
+
+        }
+
+
+        hideLoading();
+
+    }
+    catch(error){
+
+        showError(
+            error
+        );
+
+        hideLoading();
+
+    }
+
+}
+
+
+/* =====================================================
+ HTML SECURITY
+===================================================== */
+
+function escapeHTML(
+value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+ SEARCH BUTTON
+===================================================== */
+
+$("searchBtn")
+.onclick =
+()=>{
+
+    const query =
+        $("search")
+        .value
+        .trim();
+
+
+    if(query.length >= 2){
+
+        searchPlaces(
+            query
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+ ENTER SEARCH
+===================================================== */
+
+$("search")
+.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key ===
+            "Enter"
+        ){
+
+            const query =
+                $("search")
+                .value
+                .trim();
+
+
+            if(query.length >= 2){
+
+                searchPlaces(
+                    query
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+ START
+===================================================== */
+
+(async function(){
+
+    try{
+
+        await refreshWeather();
+
+    }
+    catch(error){
+
+        showError(
+            error
+        );
+
+        hideLoading();
+
+    }
+
+})();
+
+</script>
+
+</body>
+
+</html>
